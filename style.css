@@ -1,0 +1,202 @@
+/* استيراد الخطوط */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@400;700&display=swap');
+
+/* 1. تنظيف الـ Body من أي صور عشان ميحصلش تضارب */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #7a1b1b;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed; /* تثبيت الطبقة */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* عشان تكون خلف المحتوى */
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* بنلغي الـ fixed هنا ونعتمد على fixed بتاع الطبقة نفسها */
+    will-change: transform; 
+}
+
+
+/* الستارة الملكية */
+.curtain-container { 
+    position: fixed; 
+    inset: 0; 
+    z-index: 9999; 
+    display: flex; 
+    cursor: pointer; 
+}
+.curtain-left, .curtain-right { 
+    width: 100%; 
+    height: 100%; 
+    background: #7a1b1b; 
+    background-image: repeating-linear-gradient(to right, #7a1b1b 0, #7a1b1b 40px, #8d2121 50px);
+    transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.curtain-open .curtain-left { transform: translateX(-100%); }
+.curtain-open .curtain-right { transform: translateX(100%); }
+
+.tap-hint { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* يبقى ثابت في المنتصف */
+    color: #fff; 
+    z-index: 10000; 
+    animation: tap-bounce 1.2s infinite;
+}
+
+@keyframes tap-bounce {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0) scale(1); }
+    50% { transform: translate(-50%, -50%) translateY(-10px) scale(1.1); }
+}
+
+
+/* نصوص الدعوة فوق وتحت الاسماء */
+.invitation-text {
+    text-transform: uppercase;
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin: 40px 0;
+    letter-spacing: 1px;
+}
+
+/* اسماء العروسين */
+.names { 
+    font-family: 'Alex Brush', cursive; 
+    font-size: 3.0rem; 
+    margin: 10px 0; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* سهم تحت الاسماء */
+/* سهم التحريك تحت الاسماء */
+#scroll-indicator {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    font-family: 'Georgia', serif;
+    z-index: 9999;
+}
+
+.arrow {
+    display: block;
+    font-size: 32px;       /* حجم السهم */
+    margin-bottom: 8px;    /* المسافة بين السهم والكلمة */
+    animation: bounce 1s infinite alternate; /* حركة ناعمة */
+}
+
+#scroll-indicator span:last-child {
+    font-size: 12px;
+    letter-spacing: 2px;
+    opacity: 0.85;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+    100% { transform: translateY(0); }
+}
+
+/* ضبط للموبايل */
+@media (max-width: 768px) {
+    .arrow {
+        font-size: 24px;
+    }
+    #scroll-indicator span:last-child {
+        font-size: 11px;
+    }
+}
+
+
+/* الأقسام */
+.section { 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    background-color: rgba(255, 255, 255, 0.4); 
+    border-bottom: 1px solid rgba(122, 27, 27, 0.1);
+}
+
+/* الخربشة */
+.scratch-wrapper { display: flex; gap: 15px; position: relative; margin: 30px 0; }
+.scratch-box { position: relative; width: 100px; height: 100px; }
+canvas { position: absolute; top: 0; left: 0; z-index: 10; border-radius: 50%; cursor: crosshair; touch-action: none; }
+.reveal { width: 100px; height: 100px; background: #fff; border: 2px solid #d4af37; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+.scratch-hint { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); background: #d4af37; color: #fff; padding: 8px 20px; border-radius: 20px; font-size: 0.8rem; z-index: 20; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.time-info { font-weight: bold; font-size: 1.2rem; opacity: 0; transition: 1s; margin-top: 20px; background: white; padding: 10px 20px; border-radius: 30px; }
+.show { opacity: 1; transform: scale(1.1); }
+
+/* العداد التنازلي */
+#countdown { display: flex; gap: 15px; margin-bottom: 40px; }
+.countdown-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #7a1b1b;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.unit { background: #7a1b1b; color: #fff; padding: 15px; border-radius: 10px; min-width: 65px; }
+.unit span { font-size: 1.8rem; font-weight: bold; display: block; }
+
+/* الضيافة */
+.treats-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #7a1b1b;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.treats { display: flex; justify-content: center; gap: 40px; margin-top: 20px; }
+.treats .item img { width: 80px; height: 80px; margin-bottom: 10px; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1)); }
+
+/* صورة القاعة */
+.hall-image { width: 100%; max-width: 600px; margin-bottom: 20px; border-radius: 10px; }
+
+/* زرار اللوكيشن */
+.map-btn { 
+    color: #fff; 
+    background: #7a1b1b; 
+    font-weight: bold; 
+    text-decoration: none; 
+    padding: 12px 25px; 
+    border-radius: 25px; 
+    margin: 20px 0; 
+    display: inline-block; 
+    transition: 0.3s; 
+}
+.map-btn:hover { background: #8d2121; }
+
+/* الفورم */
+form { display: flex; flex-direction: column; gap: 15px; width: 250px; max-width: 90%; }
+input, select { padding: 10px; border-radius: 10px; border: 1px solid #ccc; font-size: 0.9rem; }
+button { background: #7a1b1b; color: #fff; padding: 12px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
+button:hover { background: #8d2121; }
+
+/* الورد المتساقط (Petals) */
+.petal { position: fixed; top: -10px; z-index: 1; pointer-events: none; animation: fall linear infinite; background: #7a1b1b; border-radius: 50% 0; }
+@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+/* أيقونة الموسيقى */
+.audio-control { position: fixed; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; z-index: 10001; }

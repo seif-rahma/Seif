@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding of Seif & Rahma</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- موسيقى -->
+<audio id="weddingMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+<div id="audio-control" class="audio-control">🔊</div>
+
+<!-- الستارة -->
+<div class="curtain-container" id="curtain" onclick="startExperience()">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+    <div class="tap-hint" id="tap-hint">
+        <div class="finger">👆</div>
+        <p>TAP TO OPEN</p>
+    </div>
+</div>
+
+<!-- الورد المتساقط -->
+<div id="flower-container"></div>
+
+<div class="main-content">
+
+    <!-- الصفحة الأولى -->
+    <section class="section">
+        <p class="invitation-text">YOU ARE CORDIALLY INVITED TO CELEBRATE THE WEDDING OF</p>
+        <h1 class="names">Rahma<br>&<br>Seif</h1>
+        <p class="invitation-text">WE WOULD LIKE TO INVITE YOU TO CELEBRATE WITH US THE MOST SPECIAL DAY OF OUR LIVES. IT WOULD BE AN HONOR TO HAVE YOU PRESENT AT THIS IMPORTANT MOMENT.</p>
+        <div id="div id="scroll-indicator""">
+    <span>Scroll Down</span>
+            <span class="arrow">&darr;</span> <!-- السهم مضمون على كل الهواتف -->
+    
+</div>
+
+    </section>
+
+    <!-- الخربشة -->
+    <section class="section">
+        <h2 class="section-title">Scratch to see the date</h2>
+        <div class="scratch-wrapper">
+            <div class="scratch-box">
+                <canvas id="canvas-day" width="100" height="100"></canvas>
+                <div class="reveal">24</div>
+            </div>
+            <div class="scratch-box">
+                <canvas id="canvas-month" width="100" height="100"></canvas>
+                <div class="reveal">MAR</div>
+            </div>
+            <div class="scratch-box">
+                <canvas id="canvas-year" width="100" height="100"></canvas>
+                <div class="reveal">2026</div>
+            </div>
+        </div>
+        <div id="time-display" class="time-info">FROM 4:00 PM TO 6:00 PM</div>
+    </section>
+
+    <!-- العداد التنازلي -->
+    <section class="section">
+        <p class="countdown-text">Our Big Day is Coming! ⏳</p>
+        <div id="countdown">
+            <div class="unit"><span id="days">00</span><p>Days</p></div>
+            <div class="unit"><span id="hours">00</span><p>Hrs</p></div>
+            <div class="unit"><span id="mins">00</span><p>Min</p></div>
+        </div>
+
+        <!-- الضيافة -->
+        <p class="treats-text">We have some treats for you!</p>
+        <div class="treats">
+            <div class="item">
+                <img src="https://cdn-icons-png.flaticon.com/512/3132/3132715.png">
+                <p>Chocolate</p>
+            </div>
+            <div class="item">
+                <img src="https://cdn-icons-png.flaticon.com/512/2405/2405479.png">
+                <p>Soft Drinks</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- مكان الحفل -->
+    <section class="section">
+        <h3 class="venue">Royal Garden</h3>
+        <p class="location-text">Engineers Syndicate Club - 6th October</p>
+        <img src="hall.jpg" alt="Wedding Hall" class="hall-image">
+        <a href="https://maps.app.goo.gl/qcyrU6mbiWPWzHJR8" target="_blank" class="map-btn">📍 View Location Map</a>
+    </section>
+
+    <!-- تأكيد الحضور -->
+    <section class="section">
+        <h2 class="section-title">Confirm Your Attendance</h2>
+        <form id="rsvp-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <select name="attendance" required>
+                <option value="">Will you attend?</option>
+                <option value="yes">Yes, I will attend</option>
+                <option value="no">No, I can't make it</option>
+            </select>
+            <button type="submit">Confirm</button>
+        </form>
+        <p id="form-success" style="display:none; margin-top:10px; color:green;">Your response has been sent!</p>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
